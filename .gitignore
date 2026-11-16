@@ -1,0 +1,21 @@
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*credentials*.json
+*secrets*.json
+config.local.json
+# Customer media, voices, fonts and rendered outputs
+**/assets/
+**/fonts/
+*.mp4
+*.mov
+*.wav
+*.mp3
+*.jpg
+*.jpeg
+*.png
+*.otf
+*.ttf
+__pycache__/
+*.pyc

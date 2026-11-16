@@ -1,0 +1,21 @@
+﻿[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Main,Pretendard,96,&H00FFFFFF,&H00FFFFFF,&H00251C19,&H90000000,-1,0,0,0,100,100,0,0,1,3.5,1.5,2,100,165,360,1
+Style: Badge,Pretendard,66,&H00FFFFFF,&H00FFFFFF,&H00251C19,&H90000000,-1,0,0,0,100,100,0,0,1,3,1,7,90,90,190,1
+Style: Small,Pretendard,34,&H00FFFFFF,&H00FFFFFF,&H00251C19,&H90000000,-1,0,0,0,100,100,0,0,1,2,1,7,90,90,285,1
+Style: Hook,Pretendard ExtraBold,100,&H00FFFFFF,&H00FFFFFF,&H00251C19,&H80000000,-1,0,0,0,100,100,0,0,1,4,2,8,90,150,210,1
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:02.08,Hook,,0,0,0,,{\fad(80,130)\fscx96\fscy96\t(0,220,\fscx100\fscy100)}{\c&H004A7BC3&}겨드랑이 왁싱{\c&H00FFFFFF&}\N이 차이 실화인가요?
+Dialogue: 0,0:00:00.12,0:00:02.96,Main,,0,0,0,,{\fad(90,130)\fscx97\fscy97\t(0,220,\fscx100\fscy100)}겨드랑이 왁싱\N{\c&H004451DE&}예약 고민{\c&H00FFFFFF&}되셨나요?
+Dialogue: 0,0:00:03.04,0:00:07.71,Main,,0,0,0,,{\fad(90,130)\fscx97\fscy97\t(0,220,\fscx100\fscy100)}작은 구간씩\N{\c&H004451DE&}꼼꼼하게{\c&H00FFFFFF&} 관리
+Dialogue: 0,0:00:07.96,0:00:11.38,Main,,0,0,0,,{\fad(90,130)\fscx97\fscy97\t(0,220,\fscx100\fscy100)}화곡역 선샤인왁싱\N편하게 상담하세요
+Dialogue: 0,0:00:02.17,0:00:05.62,Badge,,0,0,0,,{\fad(120,120)}정리 전
+Dialogue: 0,0:00:05.75,0:00:11.33,Badge,,0,0,0,,{\fad(120,120)\c&H004A7BC3&\fscx92\fscy92\t(0,260,\fscx100\fscy100)}정리 후
+Dialogue: 0,0:00:02.17,0:00:11.42,Small,,0,0,0,,{\fad(100,100)}실제 전후 사진

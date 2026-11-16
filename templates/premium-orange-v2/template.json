@@ -1,0 +1,40 @@
+{
+  "before": "assets/before.jpg",
+  "after": "assets/after.jpg",
+  "logo": "assets/logo.png",
+  "audio": "assets/voice.mp3",
+  "duration": 13.7,
+  "split": 6.9,
+  "speed": 1.2,
+  "hook": "{\\c&H004A7BC3&}겨드랑이 왁싱{\\c&H00FFFFFF&}\\N이 차이 실화인가요?",
+  "captions": [
+    {
+      "start": 0.15,
+      "end": 3.55,
+      "text": "겨드랑이 왁싱\\N{\\c&H004451DE&}예약 고민{\\c&H00FFFFFF&}되셨나요?"
+    },
+    {
+      "start": 3.65,
+      "end": 9.25,
+      "text": "작은 구간씩\\N{\\c&H004451DE&}꼼꼼하게{\\c&H00FFFFFF&} 관리"
+    },
+    {
+      "start": 9.55,
+      "end": 13.65,
+      "text": "화곡역 선샤인왁싱\\N편하게 상담하세요"
+    }
+  ],
+  "labels": [
+    {
+      "start": 1.8,
+      "end": 6.75,
+      "text": "정리 전"
+    },
+    {
+      "start": 6.9,
+      "end": 13.6,
+      "text": "정리 후",
+      "after": true
+    }
+  ]
+}

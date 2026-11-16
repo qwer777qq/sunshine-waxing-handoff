@@ -1,0 +1,40 @@
+{
+  "before": "assets/before.jpg",
+  "after": "assets/after.jpg",
+  "logo": "assets/logo.png",
+  "audio": "assets/voice.mp3",
+  "duration": 10.8,
+  "split": 5.4,
+  "speed": 1.2,
+  "hook": "{\\c&H004A7BC3&}올림머리 전{\\c&H00FFFFFF&}\\N뒷목 차이 보이세요?",
+  "captions": [
+    {
+      "start": 0.28,
+      "end": 2.96,
+      "text": "올림머리 하면\\N{\\c&H004451DE&}보이는 뒷목{\\c&H00FFFFFF&}"
+    },
+    {
+      "start": 3.6,
+      "end": 6.32,
+      "text": "잔머리 정리\\N{\\c&H004451DE&}전과 후{\\c&H00FFFFFF&}를 확인해요"
+    },
+    {
+      "start": 7.12,
+      "end": 10.46,
+      "text": "화곡역 선샤인왁싱\\N원하는 라인 상담"
+    }
+  ],
+  "labels": [
+    {
+      "start": 2.6,
+      "end": 5.38,
+      "text": "정리 전"
+    },
+    {
+      "start": 5.4,
+      "end": 10.7,
+      "text": "정리 후",
+      "after": true
+    }
+  ]
+}
