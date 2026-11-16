@@ -8,6 +8,7 @@ ROOT=Path(__file__).resolve().parent
 
 def main():
  ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--config',default=str(ROOT/'presets/06-before-after.json'));ap.add_argument('--before');ap.add_argument('--after');ap.add_argument('--output',required=True);ap.add_argument('--cover-only',action='store_true');args=ap.parse_args()
+ if bool(args.before)!=bool(args.after):raise ValueError('Provide both --before and --after so a new photo is never paired with the old example.')
  cp=Path(args.config).resolve();c=json.loads(cp.read_text(encoding='utf-8-sig'))
  if not c.get('pair_verified'):raise ValueError('Confirm the same customer and body area, then set pair_verified=true.')
  def path(s):
