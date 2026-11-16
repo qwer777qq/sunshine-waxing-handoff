@@ -22,7 +22,7 @@ def font(size,weight=500):
     except (OSError,ValueError):pass
     return f
 
-def draw_lines(im,lines,x,y,size,color,weight=600,max_width=810):
+def draw_lines(im,lines,x,y,size,color,weight=600,max_width=720):
     lines=lines if isinstance(lines,list) else [lines]
     if len(lines)>2:raise ValueError('Use at most two title lines.')
     while size>36 and max((font(size,weight).getlength(t) for t in lines),default=0)>max_width:size-=2
@@ -40,21 +40,21 @@ def overlays(config,out):
     mode=config['layout']; title=config.get('title',[])
     title_im=Image.new('RGBA',(W,H));d=ImageDraw.Draw(title_im)
     if mode=='full':
-        gradient(title_im,0,620,True);draw_lines(title_im,title,64,300,72,'white')
+        gradient(title_im,0,950,True);draw_lines(title_im,title,160,570,72,'white')
     elif mode=='top-strip':
-        draw_lines(title_im,title,64,240,62,INK)
+        draw_lines(title_im,title,160,570,62,INK)
     elif mode=='minimal':
         pass
     elif mode=='maternity':
-        draw_lines(title_im,title,64,250,66,INK)
+        draw_lines(title_im,title,160,570,66,INK)
     else:raise ValueError('Unknown layout. Use full, top-strip, minimal or maternity.')
     title_im.save(out/'title-overlay.png')
     brand=Image.new('RGBA',(W,H));d=ImageDraw.Draw(brand)
     logo=ROOT/'../../designs/approved-20261116/website/assets/logo.webp'
     if logo.exists():
-        im=Image.open(logo).convert('RGBA');im.thumbnail((62,62));brand.alpha_composite(im,(64,160))
-    d.rounded_rectangle((142,164,635,216),radius=5,fill=CREAM)
-    d.text((159,176),'SUNSHINE  /  WAXING',font=font(25),fill=INK,anchor='lt')
+        im=Image.open(logo).convert('RGBA');im.thumbnail((48,48));brand.alpha_composite(im,(160,470))
+    d.rounded_rectangle((220,470,660,518),radius=5,fill=CREAM)
+    d.text((236,480),'SUNSHINE  /  WAXING',font=font(25),fill=INK,anchor='lt')
     brand.save(out/'brand-overlay.png')
     return title_im,brand
 
@@ -70,7 +70,10 @@ def subtitles(config,out,duration):
         start,end=float(c['start']),float(c['end'])
         if not (0<=start<end<=duration+.02):raise ValueError('Caption time must be within the final output duration.')
         if start<last_end:raise ValueError('Caption overlap: use one idea at a time.')
-        last_end=end;content=ass_escape(c['text'])
+        last_end=end
+        lines=c['text'].split('\n')
+        if len(lines)>2 or any(font(56,600).getlength(line)>700 for line in lines):raise ValueError('Caption exceeds safe width: shorten it or use at most two short lines.')
+        content=ass_escape(c['text'])
         if c.get('highlight'):
             key=ass_escape(c['highlight']);content=content.replace(key,r'{\c&H6174EE&}'+key+r'{\c&HFFFFFF&}')
         events.append(f'Dialogue: 0,{ass_time(start)},{ass_time(end)},Caption,,0,0,0,,{{\\fad(120,160)}}{content}')
@@ -83,7 +86,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Caption,Noto Sans KR,56,&H00FFFFFF,&H006174EE,&H00302018,&H80302018,-1,0,0,0,100,100,0,0,1,3,1,2,80,180,330,1
+Style: Caption,Noto Sans KR,56,&H00FFFFFF,&H006174EE,&H00302018,&H80302018,-1,0,0,0,100,100,0,0,1,3,1,2,160,200,530,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -137,8 +140,8 @@ def main():
     if crop:chain.append('crop='+':'.join(str(v) for v in [crop[2],crop[3],crop[0],crop[1]]))
     if stream.get('color_transfer') in ('arib-std-b67','smpte2084'):chain.append(TONEMAP)
     mode=c['layout'];fit=c.get('fit','cover');box_h=H;box_y=0
-    if mode=='top-strip':box_h=H-420;box_y=420
-    if mode=='maternity':box_h=H-560;box_y=420
+    if mode=='top-strip':box_h=H-760;box_y=760
+    if mode=='maternity':box_h=H-760;box_y=760
     if fit=='contain':
         chain.extend([f'scale={W}:{box_h}:force_original_aspect_ratio=decrease:force_divisible_by=2',f'pad={W}:{box_h}:(ow-iw)/2:(oh-ih)/2:color=0xF5F0E8'])
     else:chain.extend([f'scale={W}:{box_h}:force_original_aspect_ratio=increase:force_divisible_by=2',f'crop={W}:{box_h}'])

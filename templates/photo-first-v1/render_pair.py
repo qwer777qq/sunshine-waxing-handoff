@@ -24,14 +24,16 @@ def main():
  out.mkdir(parents=True,exist_ok=True)
  for fmt,height in [('story',1920),('portrait',1350),('square',1080)]:
   canvas=Image.new('RGB',(1080,height),CREAM);d=ImageDraw.Draw(canvas)
-  top=220 if fmt=='story' else 150;bottom=40;gap=16;ph=(height-top-bottom-gap)//2
-  d.text((42,75 if fmt=='story' else 43),c['title'],font=font(52,600),fill=INK,anchor='lt')
+  top=620 if fmt=='story' else 150;bottom=40;gap=16;ph=(height-top-bottom-gap)//2
+  title_y=530 if fmt=='story' else 43
+  if font(52,600).getlength(c['title'])>720:raise ValueError('Shorten the title to fit the safe area.')
+  d.text((160,title_y),c['title'],font=font(52,600),fill=INK,anchor='lt')
   for i,(im,label) in enumerate([(before,'BEFORE  /  시술 전'),(after,'AFTER  /  시술 후')]):
    y=top+i*(ph+gap)
    if c.get('fit','cover')=='contain':
     box=Image.new('RGB',(1080,ph),CREAM);resized=ImageOps.contain(im,(1080,ph),Image.Resampling.LANCZOS);box.paste(resized,((1080-resized.width)//2,(ph-resized.height)//2))
    else:box=ImageOps.fit(im,(1080,ph),Image.Resampling.LANCZOS,centering=tuple(c.get(['before_center','after_center'][i],[.5,.5])))
-   canvas.paste(box,(0,y));d=ImageDraw.Draw(canvas);d.rounded_rectangle((24,y+22,378,y+88),radius=6,fill=CREAM);d.text((42,y+38),label,font=font(28,500),fill=INK,anchor='lt')
+   canvas.paste(box,(0,y));d=ImageDraw.Draw(canvas);d.rounded_rectangle((145,y+22,480,y+88),radius=6,fill=CREAM);d.text((160,y+38),label,font=font(28,500),fill=INK,anchor='lt')
   canvas.save(out/f'comparison-{fmt}.png')
  # Video and cover share the same source and small start logo.
  cfg={'layout':'minimal','input':str(out/'comparison-story.png'),'media_type':'image','title':[],'duration':c.get('duration',9),'speed':1.2,'fit':'contain','voice':str(path(c['voice'])) if c.get('voice') else None,'voice_speed':c.get('voice_speed',1.2),'captions':[]}

@@ -19,7 +19,7 @@ class Layout:
     def rect(self,x,y,w,h,color):
         ImageDraw.Draw(self.image).rectangle((x,y,x+w,y+h), fill=color)
         self.svg.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{color}"/>')
-    def text(self,lines,x,y,size=80,color=INK,weight=600,max_width=920):
+    def text(self,lines,x,y,size=80,color=INK,weight=600,max_width=720):
         if isinstance(lines,str): lines=[lines]
         if len(lines)>2: raise ValueError('Use one or two short title lines.')
         while size>26 and max((font(size,weight).getlength(t) for t in lines),default=0)>max_width: size-=2
@@ -36,11 +36,11 @@ class Layout:
         self.image.paste(im,(x,y)); data=io.BytesIO();im.save(data,format='JPEG',quality=95)
         self.svg.append(f'<image data-name="교체할 실제 사진" x="{x}" y="{y}" width="{w}" height="{h}" href="data:image/jpeg;base64,{base64.b64encode(data.getvalue()).decode()}"/>')
     def shade(self):
-        layer=Image.new('RGBA',(W,720));d=ImageDraw.Draw(layer)
-        for y in range(720): d.line((0,y,W,y),fill=(30,23,18,int(160*(1-y/720)**1.4)))
+        layer=Image.new('RGBA',(W,1000));d=ImageDraw.Draw(layer)
+        for y in range(1000): d.line((0,y,W,y),fill=(30,23,18,int(175*(1-y/1000)**1.4)))
         self.image.paste(layer,(0,0),layer)
-        self.svg.append('<defs><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e1712" stop-opacity=".63"/><stop offset="1" stop-color="#1e1712" stop-opacity="0"/></linearGradient></defs><rect width="1080" height="720" fill="url(#shade)"/>')
-    def brand(self,y=100,color=INK): self.text('SUNSHINE  /  WAXING',64,y,28,color,500)
+        self.svg.append('<defs><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e1712" stop-opacity=".63"/><stop offset="1" stop-color="#1e1712" stop-opacity="0"/></linearGradient></defs><rect width="1080" height="1000" fill="url(#shade)"/>')
+    def brand(self,y=100,color=INK): self.text('SUNSHINE  /  WAXING',160,y,28,color,500)
     def save(self,out,id):
         self.image.save(out/f'{id}.png');self.image.save(out/f'{id}.webp',quality=92)
         (out/f'{id}.svg').write_text('\n'.join(self.svg+['</svg>']),encoding='utf-8')
@@ -49,24 +49,24 @@ def build(c,base):
     p=Path(c['photo']);p=p if p.is_absolute() else base/p
     source=ImageOps.exif_transpose(Image.open(p)).convert('RGB');a=Layout();mode=c['layout'];center=c.get('center',[.5,.5])
     if mode=='full':
-        a.photo(source,0,0,W,H,center);a.shade();a.brand(126,'#FFFFFF');a.text(c['title'],64,300,86,'#FFFFFF');a.text(c['label'],66,555,27,'#FFFFFF',400)
+        a.photo(source,0,0,W,H,center);a.shade();a.brand(470,'#FFFFFF');a.text(c['title'],160,570,78,'#FFFFFF');a.text(c['label'],160,825,27,'#FFFFFF',400)
     elif mode=='header':
-        a.photo(source,0,432,W,H-432,center);a.brand(64);a.text(c['title'],64,174,86)
+        a.photo(source,0,900,W,H-900,center);a.brand(470);a.text(c['title'],160,570,78)
     elif mode=='label':
-        a.photo(source,0,0,W,H,center);a.rect(50,290,680,182,CREAM);a.text(c['label'],76,312,24,MUTED,400,610);a.text(c['title'],76,369,58,INK,600,610)
+        a.photo(source,0,0,W,H,center);a.rect(145,480,750,270,CREAM);a.text(c['label'],160,500,24,MUTED,400,700);a.text(c['title'],160,570,58,INK,600,700)
     elif mode=='maternity':
-        a.brand(90);a.text(c['label'],64,237,28,MUTED,400);a.text(c['title'],64,307,82)
-        a.photo(source,0,570,W,1080,contain=True);a.text(c.get('footer',''),64,1700,33,INK,400)
+        a.brand(470);a.text(c['label'],160,525,28,MUTED,400);a.text(c['title'],160,580,72)
+        a.photo(source,0,800,W,1080,contain=True);a.text(c.get('footer',''),160,760,28,INK,400)
     elif mode=='pair':
         if not c.get('pair_verified'): raise ValueError('Verify the before/after pair and set pair_verified=true.')
-        a.brand(54);a.text(c['title'],64,130,66)
-        for key,y,label in [('before',260,'BEFORE  /  시술 전'),('after',1096,'AFTER  /  시술 후')]:
+        a.brand(470);a.text(c['title'],160,530,62)
+        for key,y,label in [('before',650,'BEFORE  /  시술 전'),('after',1278,'AFTER  /  시술 후')]:
             if c.get(key):
                 fp=Path(c[key]);fp=fp if fp.is_absolute() else base/fp
                 im=ImageOps.exif_transpose(Image.open(fp)).convert('RGB')
             else:
                 x,yy,w,h=c[key+'_rect'];im=source.crop((x,yy,x+w,yy+h))
-            a.photo(im,0,y,W,824,c.get(key+'_center',[.5,.5]));a.rect(24,y+22,324,62,CREAM);a.text(label,42,y+37,26,INK,500)
+            a.photo(im,0,y,W,628,c.get(key+'_center',[.5,.5]));a.rect(145,y+22,310,62,CREAM);a.text(label,160,y+37,26,INK,500)
     else: raise ValueError(f'Unknown layout: {mode}')
     return a
 
