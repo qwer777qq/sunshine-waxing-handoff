@@ -1,5 +1,7 @@
 # 선샤인왁싱 숏츠 제작·게시 인수인계
 
+**처음 받았거나 다른 PC에서 이어서 작업한다면 [START_HERE.md](START_HERE.md)를 먼저 읽으세요.** 전체 결과물·출처·실행법·검증 범위·다음 대화에 보낼 요청 메시지를 한곳에 정리했습니다. [전체 ZIP 받기](https://github.com/qwer777qq/sunshine-waxing-handoff/archive/refs/heads/main.zip).
+
 ## 최신: 승인 디자인과 영상 템플릿
 
 2026-11-16 후속 승인한 **사진 중심 클린 베이지** 시안과 릴스·쇼츠 공용 템플릿을 추가했습니다. 아래 과거 주황/v5 기록과 구분하며, 새 제작은 [현재 디자인 기준](CURRENT_DESIGN.md)을 먼저 적용합니다.

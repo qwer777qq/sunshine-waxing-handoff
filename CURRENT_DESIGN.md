@@ -12,5 +12,7 @@
 - 요금·운영시간: 현 시안은 2026-11-16 플레이스 확인값. 다음 게시 때 변경 여부 확인.
 - 임산부: 현재 사진은 플레이스 업체 공개 사진. Instagram 임산부 사진 수집은 로그인 단계에서 미완료.
 - 재사용: [시안 원본](designs/approved-20261116/README.md), [영상 템플릿 실행](templates/photo-first-v1/README.md).
+- 새 쇼츠 표지: [5안 PNG·SVG](samples/shorts-covers/README.md). 기본 추천 01 사진 전체형, 전후에는 05. [사진·문구 교체 방법](templates/shorts-covers-v1/README.md).
+- 전달: 바탕화면에 새 납품 폴더를 만들지 않고 GitHub 다운로드로 제공. [다른 PC 시작 안내와 다음 작업 요청 메시지](START_HERE.md).
 
 이 저장소에 푸시하는 것과 Instagram/YouTube에 게시하는 것은 별개입니다. 이번 요청은 재사용 템플릿 제작과 GitHub 푸시입니다.
