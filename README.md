@@ -5,6 +5,9 @@
 2026-11-16 후속 승인한 **사진 중심 클린 베이지** 시안과 릴스·쇼츠 공용 템플릿을 추가했습니다. 아래 과거 주황/v5 기록과 구분하며, 새 제작은 [현재 디자인 기준](CURRENT_DESIGN.md)을 먼저 적용합니다.
 
 - [영상 템플릿 5종 · 비포애프터 포함 실행 방법](templates/photo-first-v1/README.md)
+- [재생 가능한 쇼츠 5종 · 원본 MP4 다운로드](samples/shorts/README.md)
+- [쇼츠 썸네일 5안 · PNG·편집 SVG](samples/shorts-covers/README.md)
+- [썸네일 사진·문구 교체하기](templates/shorts-covers-v1/README.md)
 - [다른 PC에 스킬 설치하기 · ZIP 다운로드](INSTALL_SKILL.md)
 - [승인 시안 24종/72개 출력 · SVG·Figma 편집 원본](designs/approved-20261116/README.md)
 - [고객에게 보여줄 시안 사이트](https://sunshine-waxing-design-collection.alalshow3.chatgpt.site)

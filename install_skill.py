@@ -20,6 +20,7 @@ def main():
  shutil.copytree(ROOT/'skills'/NAME,target,ignore=ignored)
  kit=target/'assets/toolkit'
  shutil.copytree(ROOT/'templates/photo-first-v1',kit/'templates/photo-first-v1',ignore=ignored)
+ shutil.copytree(ROOT/'templates/shorts-covers-v1',kit/'templates/shorts-covers-v1',ignore=ignored)
  shutil.copytree(ROOT/'designs/approved-20261116',kit/'designs/approved-20261116',ignore=ignored)
  shutil.copy2(ROOT/'CURRENT_DESIGN.md',kit/'CURRENT_DESIGN.md')
  manifest={'name':NAME,'version':'2026-11-16','self_contained':True,'source':'https://github.com/qwer777qq/sunshine-waxing-handoff','render_sha256':hashlib.sha256((kit/'templates/photo-first-v1/render.py').read_bytes()).hexdigest()}

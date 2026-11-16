@@ -35,3 +35,9 @@ local-validation/
 outputs/
 *.local.json
 *.log
+
+# User-requested downloadable final samples (raw customer media remain excluded).
+!samples/shorts/*.mp4
+!samples/shorts-covers/*.png
+!samples/shorts-covers/*.jpg
+!designs/approved-20261116/website/videos/*.mp4

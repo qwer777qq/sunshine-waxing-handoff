@@ -1,0 +1,7 @@
+[
+  {"id":"01","name":"사진 전체형","layout":"full","photo":"../../designs/approved-20261116/website/assets/leg.jpg","title":["다리 왁싱,","이렇게 진행돼요"],"label":"LEG WAXING","center":[0.5,0.5]},
+  {"id":"02","name":"상단 제목형","layout":"header","photo":"../../designs/approved-20261116/website/assets/leg.jpg","title":["시술 장면을","가까이"],"label":"LEG WAXING","center":[0.5,0.5]},
+  {"id":"03","name":"작은 라벨형","layout":"label","photo":"../../designs/approved-20261116/website/assets/leg.jpg","title":["다리 왁싱 기록"],"label":"SUNSHINE WAXING","center":[0.5,0.5]},
+  {"id":"04","name":"임산부 전용","layout":"maternity","photo":"../../designs/approved-20261116/website/assets/maternity-place.jpg","title":["임산부 왁싱","궁금한 점부터"],"label":"MATERNITY","footer":"예비맘 예약 상담 · 선샤인왁싱"},
+  {"id":"05","name":"비포애프터형","layout":"pair","photo":"../../designs/approved-20261116/website/assets/before-after.webp","title":["뒷목 라인, 전후 차이"],"label":"BEFORE & AFTER","before_rect":[56,63,448,196],"after_rect":[56,316,448,188],"pair_verified":true}
+]

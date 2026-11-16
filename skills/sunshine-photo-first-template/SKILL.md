@@ -35,6 +35,10 @@ python <이 스킬 폴더>/scripts/run.py --preset photo-demo --output <새 출�
 
 전후형은 `--before <사진> --after <사진>`으로 교체한다. 같은 고객·부위와 전후 순서를 확인한다. 별도 JSON의 `pair_evidence`를 새 소재에 맞춰 기록하고 `pair_verified`는 확인 후에만 true로 둔다. 같은 사진을 전후로 중복 사용하거나 피부·털을 바꾸어 결과를 만들지 않는다. 넓은 가로 사진은 중요한 변화가 잘리지 않는 크롭인지 확인하며 필요하면 fit을 contain으로 바꾼다.
 
+## 쇼츠 썸네일 5종
+
+별도 표지 시안을 만들 때는 toolkit의 `templates/shorts-covers-v1/README.md`와 `presets.json`을 사용한다. 기본 추천은 01 사진 전체형, 실제 전후는 05 비교형이다. 사진과 두 줄 이내 제목을 바꾸고 `python <toolkit>/templates/shorts-covers-v1/render.py --config <설정 JSON> --output <새 폴더>`로 1080×1920 PNG·WebP·편집 SVG를 만든다. 저장소 안에서는 toolkit 대신 저장소 루트를 사용한다. SVG를 전달한 상태와 Figma 파일 자체를 수정한 상태를 구분한다.
+
 ## 유지할 기본값
 
 - 1080×1920, 30fps. 영상 1.2배속, 로고 첫 2초, full 제목 첫 2.8초.
