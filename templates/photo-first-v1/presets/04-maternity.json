@@ -1,0 +1,13 @@
+{
+  "layout": "maternity",
+  "input": "../../../designs/approved-20261116/website/assets/maternity-place.jpg",
+  "media_type": "image",
+  "title": ["임산부 왁싱", "예비맘을 위한 예약 상담"],
+  "duration": 9,
+  "speed": 1.2,
+  "fit": "contain",
+  "hook_duration": 9,
+  "voice": null,
+  "voice_speed": 1.2,
+  "captions": []
+}

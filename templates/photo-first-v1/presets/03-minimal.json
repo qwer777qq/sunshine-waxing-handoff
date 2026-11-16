@@ -1,0 +1,15 @@
+{
+  "layout": "minimal",
+  "input": "../media/input.mp4",
+  "media_type": "video",
+  "title": [],
+  "start": 0,
+  "duration": 12,
+  "speed": 1.2,
+  "crop": null,
+  "fit": "cover",
+  "hook_duration": 2,
+  "voice": null,
+  "voice_speed": 1.2,
+  "captions": []
+}

@@ -19,3 +19,19 @@ config.local.json
 *.ttf
 __pycache__/
 *.pyc
+
+# Current approved, already-shared design deliverables are intentionally versioned.
+!designs/approved-20261116/**/
+!designs/approved-20261116/**/*.jpg
+!designs/approved-20261116/**/*.jpeg
+!designs/approved-20261116/**/*.png
+!designs/approved-20261116/**/*.woff2
+!designs/approved-20261116/**/*.ttf
+!templates/photo-first-v1/fonts/
+!templates/photo-first-v1/fonts/NotoSansKR.ttf
+!templates/photo-first-v1/fonts/NotoSansKR-SemiBold.ttf
+!templates/photo-first-v1/fonts/OFL.txt
+local-validation/
+outputs/
+*.local.json
+*.log

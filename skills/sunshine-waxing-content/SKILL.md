@@ -5,6 +5,10 @@ description: 선샤인왁싱의 실제 소재로 영상·표지·새소식을 �
 
 # 선샤인 왁싱 콘텐츠
 
+## 2026-11-16 최신 승인 디자인
+
+새 제작은 [현재 디자인 기준](references/current-design.md)과 [사진 중심 영상 템플릿](https://github.com/qwer777qq/sunshine-waxing-handoff/tree/main/templates/photo-first-v1)을 우선한다. 클린 베이지, 큰 실제 사진 영역, 짧은 제목이 현재 기본값이다. 기존 아래 기록의 주황 면적·고정 프레임·엔딩 로고를 새 디자인에 자동 적용하지 않는다. 최신 시안은 [승인 디자인 묶음](https://github.com/qwer777qq/sunshine-waxing-handoff/tree/main/designs/approved-20261116)에 있고 영상 템플릿과 게시 완성본을 구분한다.
+
 선샤인 왁싱의 새소식·릴스·가격 안내를 만들 때 아래 브랜드 기준을 적용한다. 게시 수량과 채널은 매번 사용자의 현재 요청에 맞춘다.
 
 ## 검색 키워드와 해시태그

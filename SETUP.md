@@ -1,5 +1,11 @@
 # 템플릿·스킬 사용하기
 
+## 새 제작은 여기서 시작
+
+다른 PC에서 재사용하려면 [설치 안내](INSTALL_SKILL.md)에 따라 전체 ZIP을 받고 `python install_skill.py`를 실행합니다. 새 독립형 스킬 `sunshine-photo-first-template`에 코드·설정·폰트·사진이 함께 설치됩니다.
+
+현재 승인안은 [사진 중심 클린 베이지](CURRENT_DESIGN.md)입니다. 영상 입력을 지원하는 새 [photo-first-v1 실행 안내](templates/photo-first-v1/README.md)를 사용하세요. 기존 주황 템플릿은 과거 작업 재현용입니다. 최신 디자인 72개 PNG와 36개 신규 SVG 및 이전 네이티브 Figma 파일은 [승인 디자인 묶음](designs/approved-20261116/README.md)에 있습니다.
+
 ## 포함된 코드
 
 | 폴더 | 내용 |

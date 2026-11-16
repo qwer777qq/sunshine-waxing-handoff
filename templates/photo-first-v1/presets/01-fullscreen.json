@@ -1,0 +1,15 @@
+{
+  "layout": "full",
+  "input": "../media/input.mp4",
+  "media_type": "video",
+  "title": ["다리 왁싱,", "시술 장면 그대로"],
+  "start": 0,
+  "duration": 12,
+  "speed": 1.2,
+  "crop": null,
+  "fit": "cover",
+  "hook_duration": 2.8,
+  "voice": null,
+  "voice_speed": 1.2,
+  "captions": []
+}

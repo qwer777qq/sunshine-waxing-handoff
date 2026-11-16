@@ -1,0 +1,4 @@
+interface:
+  display_name: "선샤인 사진 중심 쇼츠"
+  short_description: "실제 사진·영상으로 릴스, 임산부 표지와 전후 비교 제작"
+  default_prompt: "$sunshine-photo-first-template로 승인된 사진 중심 디자인을 사용해 릴스·쇼츠 템플릿을 적용해줘."

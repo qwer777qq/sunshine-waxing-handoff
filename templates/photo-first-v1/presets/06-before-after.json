@@ -1,0 +1,16 @@
+{
+  "title": "뒷목 라인, 실제 전후",
+  "composite": "../../../designs/approved-20261116/website/assets/before-after.webp",
+  "before_rect": [56, 63, 448, 196],
+  "after_rect": [56, 316, 448, 188],
+  "before": null,
+  "after": null,
+  "pair_verified": true,
+  "pair_evidence": "선샤인 네이버 플레이스 업체 원본 합성사진. 위쪽 Before, 아래쪽 After의 명시된 순서를 유지.",
+  "fit": "cover",
+  "before_center": [0.5, 0.5],
+  "after_center": [0.5, 0.5],
+  "duration": 9,
+  "voice": null,
+  "voice_speed": 1.2
+}

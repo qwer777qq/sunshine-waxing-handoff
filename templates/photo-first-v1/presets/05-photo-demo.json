@@ -1,0 +1,15 @@
+{
+  "layout": "full",
+  "input": "../../../designs/approved-20261116/website/assets/nape.webp",
+  "media_type": "image",
+  "title": ["올림머리 전,", "뒷목부터 깔끔하게"],
+  "duration": 8,
+  "speed": 1.2,
+  "fit": "cover",
+  "hook_duration": 2.8,
+  "voice": null,
+  "voice_speed": 1.2,
+  "captions": [
+    {"start": 3.0, "end": 5.5, "text": "실제 뒷목 시술 기록", "highlight": "뒷목"}
+  ]
+}
