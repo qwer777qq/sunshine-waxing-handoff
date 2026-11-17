@@ -25,10 +25,10 @@ def font(size,weight=500):
 def draw_lines(im,lines,x,y,size,color,weight=600,max_width=720):
     lines=lines if isinstance(lines,list) else [lines]
     if len(lines)>2:raise ValueError('Use at most two title lines.')
-    while size>36 and max((font(size,weight).getlength(t) for t in lines),default=0)>max_width:size-=2
+    while size>76 and max((font(size,weight).getlength(t) for t in lines),default=0)>max_width:size-=2
     if max((font(size,weight).getlength(t) for t in lines),default=0)>max_width:raise ValueError('Title too long; shorten it to fit the picture.')
     d=ImageDraw.Draw(im)
-    for i,line in enumerate(lines):d.text((x,y+i*round(size*1.36)),line,font=font(size,weight),fill=color,anchor='lt')
+    for i,line in enumerate(lines):d.text((x,y+i*round(size*1.3)),line,font=font(size,weight),fill=color,anchor='lt')
 
 def gradient(im,y,height,reverse=False):
     d=ImageDraw.Draw(im)
@@ -40,13 +40,13 @@ def overlays(config,out):
     mode=config['layout']; title=config.get('title',[])
     title_im=Image.new('RGBA',(W,H));d=ImageDraw.Draw(title_im)
     if mode=='full':
-        gradient(title_im,0,950,True);draw_lines(title_im,title,160,570,72,'white')
+        gradient(title_im,0,950,True);draw_lines(title_im,title,160,570,96,'white')
     elif mode=='top-strip':
-        draw_lines(title_im,title,160,570,62,INK)
+        draw_lines(title_im,title,160,570,96,INK)
     elif mode=='minimal':
         pass
     elif mode=='maternity':
-        draw_lines(title_im,title,160,570,66,INK)
+        draw_lines(title_im,title,160,570,96,INK)
     else:raise ValueError('Unknown layout. Use full, top-strip, minimal or maternity.')
     title_im.save(out/'title-overlay.png')
     brand=Image.new('RGBA',(W,H));d=ImageDraw.Draw(brand)
@@ -72,7 +72,7 @@ def subtitles(config,out,duration):
         if start<last_end:raise ValueError('Caption overlap: use one idea at a time.')
         last_end=end
         lines=c['text'].split('\n')
-        if len(lines)>2 or any(font(56,600).getlength(line)>700 for line in lines):raise ValueError('Caption exceeds safe width: shorten it or use at most two short lines.')
+        if len(lines)>2 or any(font(66,600).getlength(line)>700 for line in lines):raise ValueError('Caption exceeds safe width: shorten it or use at most two short lines.')
         content=ass_escape(c['text'])
         if c.get('highlight'):
             key=ass_escape(c['highlight']);content=content.replace(key,r'{\c&H6174EE&}'+key+r'{\c&HFFFFFF&}')
@@ -86,7 +86,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Caption,Noto Sans KR,56,&H00FFFFFF,&H006174EE,&H00302018,&H80302018,-1,0,0,0,100,100,0,0,1,3,1,2,160,200,530,1
+Style: Caption,Noto Sans KR,66,&H00FFFFFF,&H006174EE,&H00302018,&H80302018,-1,0,0,0,100,100,0,0,1,3,1,2,160,200,530,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text

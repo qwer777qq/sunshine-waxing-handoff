@@ -22,7 +22,8 @@ class Layout:
     def text(self,lines,x,y,size=80,color=INK,weight=600,max_width=720):
         if isinstance(lines,str): lines=[lines]
         if len(lines)>2: raise ValueError('Use one or two short title lines.')
-        while size>26 and max((font(size,weight).getlength(t) for t in lines),default=0)>max_width: size-=2
+        min_size=76 if size>=90 else 26
+        while size>min_size and max((font(size,weight).getlength(t) for t in lines),default=0)>max_width: size-=2
         if max((font(size,weight).getlength(t) for t in lines),default=0)>max_width: raise ValueError('Shorten the title.')
         for i,s in enumerate(lines):
             yy=y+i*round(size*1.3)
@@ -49,24 +50,24 @@ def build(c,base):
     p=Path(c['photo']);p=p if p.is_absolute() else base/p
     source=ImageOps.exif_transpose(Image.open(p)).convert('RGB');a=Layout();mode=c['layout'];center=c.get('center',[.5,.5])
     if mode=='full':
-        a.photo(source,0,0,W,H,center);a.shade();a.brand(470,'#FFFFFF');a.text(c['title'],160,570,78,'#FFFFFF');a.text(c['label'],160,825,27,'#FFFFFF',400)
+        a.photo(source,0,0,W,H,center);a.shade();a.brand(470,'#FFFFFF');a.text(c['title'],160,570,96,'#FFFFFF');a.text(c['label'],160,825,27,'#FFFFFF',400)
     elif mode=='header':
-        a.photo(source,0,900,W,H-900,center);a.brand(470);a.text(c['title'],160,570,78)
+        a.photo(source,0,900,W,H-900,center);a.brand(470);a.text(c['title'],160,570,96)
     elif mode=='label':
-        a.photo(source,0,0,W,H,center);a.rect(145,480,750,270,CREAM);a.text(c['label'],160,500,24,MUTED,400,700);a.text(c['title'],160,570,58,INK,600,700)
+        a.photo(source,0,0,W,H,center);a.rect(145,480,750,340,CREAM);a.text(c['label'],160,500,24,MUTED,400,700);a.text(c['title'],160,570,96,INK,600,700)
     elif mode=='maternity':
-        a.brand(470);a.text(c['label'],160,525,28,MUTED,400);a.text(c['title'],160,580,72)
-        a.photo(source,0,800,W,1080,contain=True);a.text(c.get('footer',''),160,760,28,INK,400)
+        a.brand(470);a.text(c['label'],160,525,28,MUTED,400);a.text(c['title'],160,570,96)
+        a.photo(source,0,880,W,1000,contain=True);a.text(c.get('footer',''),160,840,28,INK,400)
     elif mode=='pair':
         if not c.get('pair_verified'): raise ValueError('Verify the before/after pair and set pair_verified=true.')
-        a.brand(470);a.text(c['title'],160,530,62)
-        for key,y,label in [('before',650,'BEFORE  /  시술 전'),('after',1278,'AFTER  /  시술 후')]:
+        a.brand(470);a.text(c['title'],160,570,96)
+        for key,y,label in [('before',850,'BEFORE  /  시술 전'),('after',1370,'AFTER  /  시술 후')]:
             if c.get(key):
                 fp=Path(c[key]);fp=fp if fp.is_absolute() else base/fp
                 im=ImageOps.exif_transpose(Image.open(fp)).convert('RGB')
             else:
                 x,yy,w,h=c[key+'_rect'];im=source.crop((x,yy,x+w,yy+h))
-            a.photo(im,0,y,W,628,c.get(key+'_center',[.5,.5]));a.rect(145,y+22,310,62,CREAM);a.text(label,160,y+37,26,INK,500)
+            a.photo(im,0,y,W,520,c.get(key+'_center',[.5,.5]));a.rect(145,y+22,310,62,CREAM);a.text(label,160,y+37,26,INK,500)
     else: raise ValueError(f'Unknown layout: {mode}')
     return a
 

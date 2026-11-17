@@ -24,10 +24,12 @@ def main():
  out.mkdir(parents=True,exist_ok=True)
  for fmt,height in [('story',1920),('portrait',1350),('square',1080)]:
   canvas=Image.new('RGB',(1080,height),CREAM);d=ImageDraw.Draw(canvas)
-  top=620 if fmt=='story' else 150;bottom=40;gap=16;ph=(height-top-bottom-gap)//2
-  title_y=530 if fmt=='story' else 43
-  if font(52,600).getlength(c['title'])>720:raise ValueError('Shorten the title to fit the safe area.')
-  d.text((160,title_y),c['title'],font=font(52,600),fill=INK,anchor='lt')
+  top=850 if fmt=='story' else 180;bottom=40;gap=16;ph=(height-top-bottom-gap)//2
+  title_y=570 if fmt=='story' else 43
+  size=96
+  while size>76 and font(size,600).getlength(c['title'])>720:size-=2
+  if font(size,600).getlength(c['title'])>720:raise ValueError('Shorten the title to fit the safe area.')
+  d.text((160,title_y),c['title'],font=font(size,600),fill=INK,anchor='lt')
   for i,(im,label) in enumerate([(before,'BEFORE  /  시술 전'),(after,'AFTER  /  시술 후')]):
    y=top+i*(ph+gap)
    if c.get('fit','cover')=='contain':
