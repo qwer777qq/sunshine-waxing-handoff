@@ -64,6 +64,25 @@ def ass_time(t):
 def ass_escape(s):
     return s.replace('\\','\\\\').replace('{','\\{').replace('}','\\}').replace('\n','\\N')
 
+CAPTION_SIZE=88
+CAPTION_WIDTH=680
+
+def caption_lines(text):
+    paragraphs=text.split('\n')
+    if len(paragraphs)>2 or any(not x.strip() for x in paragraphs):
+        raise ValueError('Use one or two non-empty caption lines.')
+    measure=lambda line: font(CAPTION_SIZE,600).getlength(line)
+    if len(paragraphs)==2:
+        if any(measure(line)>CAPTION_WIDTH for line in paragraphs): raise ValueError('Caption exceeds safe width; shorten it.')
+        return paragraphs
+    line=paragraphs[0].strip()
+    if measure(line)<=CAPTION_WIDTH: return [line]
+    words=line.split()
+    choices=[(' '.join(words[:i]),' '.join(words[i:])) for i in range(1,len(words))]
+    choices=[pair for pair in choices if all(measure(part)<=CAPTION_WIDTH for part in pair)]
+    if not choices: raise ValueError('Caption exceeds two safe lines; shorten the text.')
+    return list(min(choices,key=lambda pair: abs(measure(pair[0])-measure(pair[1]))))
+
 def subtitles(config,out,duration):
     events=[];last_end=0
     for c in config.get('captions',[]):
@@ -71,9 +90,8 @@ def subtitles(config,out,duration):
         if not (0<=start<end<=duration+.02):raise ValueError('Caption time must be within the final output duration.')
         if start<last_end:raise ValueError('Caption overlap: use one idea at a time.')
         last_end=end
-        lines=c['text'].split('\n')
-        if len(lines)>2 or any(font(66,600).getlength(line)>700 for line in lines):raise ValueError('Caption exceeds safe width: shorten it or use at most two short lines.')
-        content=ass_escape(c['text'])
+        lines=caption_lines(c['text'])
+        content=ass_escape('\n'.join(lines))
         if c.get('highlight'):
             key=ass_escape(c['highlight']);content=content.replace(key,r'{\c&H6174EE&}'+key+r'{\c&HFFFFFF&}')
         events.append(f'Dialogue: 0,{ass_time(start)},{ass_time(end)},Caption,,0,0,0,,{{\\fad(120,160)}}{content}')
@@ -86,7 +104,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Caption,Noto Sans KR,66,&H00FFFFFF,&H006174EE,&H00302018,&H80302018,-1,0,0,0,100,100,0,0,1,3,1,2,160,200,530,1
+Style: Caption,Noto Sans KR,88,&H00FFFFFF,&H006174EE,&H00302018,&H80302018,-1,0,0,0,100,100,0,0,1,5,2,2,180,220,530,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -161,7 +179,7 @@ def main():
     graph=f'[0:v]{base}[base];[1:v]format=rgba,fade=t=out:st={hook-fade}:d={fade}:alpha=1[title];[2:v]format=rgba,fade=t=out:st=1.75:d=0.25:alpha=1[brand];[base][title]overlay=0:0:enable=lt(t\\,{hook}):shortest=1[v1];[v1][brand]overlay=0:0:enable=lt(t\\,2):shortest=1[v2];[v2]ass=filename=captions.ass:fontsdir=fonts,format=yuv420p[v]'
     if voice:graph+=f';[3:a]asetpts=PTS-STARTPTS,atempo={voice_speed},apad,atrim=duration={duration},afade=t=in:d=0.03,afade=t=out:st={duration-.12}:d=0.12[a]'
     else:graph+=f';[3:a]atrim=duration={duration}[a]'
-    run([*inputs,'-filter_complex',graph,'-map','[v]','-map','[a]','-t',str(duration),'-c:v','libx264','-preset','fast','-crf','19','-c:a','aac','-b:a','160k','-ar','48000','-pix_fmt','yuv420p','-color_primaries','bt709','-color_trc','bt709','-colorspace','bt709','-movflags','+faststart','-y',str(out/'shorts.mp4')],cwd=out)
+    run(['-filter_complex_threads','1',*inputs,'-filter_complex',graph,'-map','[v]','-map','[a]','-t',str(duration),'-c:v','libx264','-threads','2','-preset','fast','-crf','19','-c:a','aac','-b:a','160k','-ar','48000','-pix_fmt','yuv420p','-color_primaries','bt709','-color_trc','bt709','-colorspace','bt709','-movflags','+faststart','-y',str(out/'shorts.mp4')],cwd=out)
     result=probe(out/'shorts.mp4');(out/'probe.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
     print(out/'shorts.mp4')
 
