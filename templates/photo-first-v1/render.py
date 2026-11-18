@@ -85,6 +85,8 @@ def caption_lines(text):
 
 def subtitles(config,out,duration):
     events=[];last_end=0
+    bar_y=int(config.get("caption_bar_y",850))
+    if not 420<=bar_y<=1160: raise ValueError("caption_bar_y must keep the bar inside the safe area (420..1160).")
     for c in config.get('captions',[]):
         start,end=float(c['start']),float(c['end'])
         if not (0<=start<end<=duration+.02):raise ValueError('Caption time must be within the final output duration.')
@@ -93,8 +95,9 @@ def subtitles(config,out,duration):
         lines=caption_lines(c['text'])
         content=ass_escape('\n'.join(lines))
         if c.get('highlight'):
-            key=ass_escape(c['highlight']);content=content.replace(key,r'{\c&H6174EE&}'+key+r'{\c&HFFFFFF&}')
-        events.append(f'Dialogue: 0,{ass_time(start)},{ass_time(end)},Caption,,0,0,0,,{{\\fad(120,160)}}{content}')
+            key=ass_escape(c['highlight']);content=content.replace(key,r'{\c&H3B45A9&}'+key+r'{\c&H3C4551&}')
+        events.append(f'Dialogue: 0,{ass_time(start)},{ass_time(end)},Bar,,0,0,0,,{{\\an7\\pos(160,{bar_y})\\p1\\fad(120,160)}}m 0 0 l 720 0 720 240 0 240{{\\p0}}')
+        events.append(f'Dialogue: 1,{ass_time(start)},{ass_time(end)},Caption,,0,0,0,,{{\\an5\\pos(520,{bar_y+120})\\fad(120,160)}}{content}')
     header='''[Script Info]
 ScriptType: v4.00+
 PlayResX: 1080
@@ -104,7 +107,8 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Caption,Noto Sans KR,88,&H00FFFFFF,&H006174EE,&H00302018,&H80302018,-1,0,0,0,100,100,0,0,1,5,2,2,180,220,530,1
+Style: Caption,Noto Sans KR,88,&H003C4551,&H003B45A9,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,0,0,5,180,220,0,1
+Style: Bar,Noto Sans KR,88,&H00E8F0F5,&H00E8F0F5,&H00453C35,&H00000000,0,0,0,0,100,100,0,0,1,2,0,7,0,0,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
