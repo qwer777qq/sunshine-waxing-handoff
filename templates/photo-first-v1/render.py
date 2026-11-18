@@ -28,7 +28,8 @@ def draw_lines(im,lines,x,y,size,color,weight=600,max_width=720):
     while size>76 and max((font(size,weight).getlength(t) for t in lines),default=0)>max_width:size-=2
     if max((font(size,weight).getlength(t) for t in lines),default=0)>max_width:raise ValueError('Title too long; shorten it to fit the picture.')
     d=ImageDraw.Draw(im)
-    for i,line in enumerate(lines):d.text((x,y+i*round(size*1.3)),line,font=font(size,weight),fill=color,anchor='lt')
+    for i,line in enumerate(lines):
+        d.text((x,y+i*round(size*1.3)),line,font=font(size,weight),fill=color,anchor='lt',stroke_width=3 if color=='white' else 0,stroke_fill='#40362F' if color=='white' else None)
 
 def gradient(im,y,height,reverse=False):
     d=ImageDraw.Draw(im)
