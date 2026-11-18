@@ -1,0 +1,16 @@
+{
+  "layout": "full",
+  "input": "../../../samples/shorts/03-minimal.mp4",
+  "media_type": "video",
+  "title": ["다리 왁싱", "시술 과정 보기"],
+  "start": 2,
+  "duration": 8,
+  "speed": 1,
+  "fit": "cover",
+  "hook_duration": 2.8,
+  "voice": null,
+  "caption_bar_y": 450,
+  "captions": [
+    {"start": 3.1, "end": 5.8, "text": "실제 다리 왁싱\n시술 장면", "highlight": "다리 왁싱"}
+  ]
+}
